@@ -1,0 +1,16 @@
+{
+  "name": "payment-request-experiments",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "parcel src/index.html"
+  },
+  "devDependencies": {
+    "parcel-bundler": "1.7.0"
+  },
+  "dependencies": {
+    "bulma": "0.6.2",
+    "instantsearch.js": "2.6.3"
+  }
+}
