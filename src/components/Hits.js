@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Highlight } from 'react-instantsearch/dom';
 import { connectHits } from 'react-instantsearch/connectors';
 
@@ -24,5 +25,17 @@ const Hits = ({ hits, onHitClick }) => (
     ))}
   </div>
 );
+
+const HitPropTypes = PropTypes.shape({
+  objectID: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+});
+
+Hits.propTypes = {
+  hits: PropTypes.arrayOf(HitPropTypes).isRequired,
+  onHitClick: PropTypes.func.isRequired,
+};
 
 export default connectHits(Hits);
