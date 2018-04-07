@@ -3,8 +3,14 @@ import { InstantSearch, Configure } from 'react-instantsearch/dom';
 import SearchBox from './components/SearchBox';
 import Hits from './components/Hits';
 
+const isPaymentRequestSupported = 'PaymentRequest' in window;
+
 class App extends Component {
   onClick = hit => {
+    if (!isPaymentRequestSupported) {
+      return;
+    }
+
     console.log(hit);
   };
 
@@ -24,9 +30,11 @@ class App extends Component {
 
         <section className="section">
           <div className="container">
-            <div className="notification is-danger">
-              Your browser doesn't support <a href="">PaymentRequest</a>.
-            </div>
+            {!isPaymentRequestSupported && (
+              <div className="notification is-danger">
+                Your browser doesn't support <a href="">PaymentRequest</a>.
+              </div>
+            )}
 
             <div className="notification">
               This is an experiments using{' '}
