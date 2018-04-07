@@ -3,7 +3,7 @@ import { connectSearchBox } from 'react-instantsearch/connectors';
 
 const SearchBox = ({ currentRefinement, refine }) => (
   <input
-    className="input is-large"
+    className="input is-medium"
     type="search"
     value={currentRefinement}
     placeholder="Apple iPhone 5S, Samsung Galaxy S9, ..."
