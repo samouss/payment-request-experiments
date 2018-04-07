@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connectSearchBox } from 'react-instantsearch/connectors';
 
 const SearchBox = ({ currentRefinement, refine }) => (
@@ -10,5 +11,10 @@ const SearchBox = ({ currentRefinement, refine }) => (
     onChange={event => refine(event.currentTarget.value)}
   />
 );
+
+SearchBox.propTypes = {
+  currentRefinement: PropTypes.string.isRequired,
+  refine: PropTypes.func.isRequired,
+};
 
 export default connectSearchBox(SearchBox);
