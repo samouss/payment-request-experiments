@@ -6,7 +6,7 @@ import Hits from './components/Hits';
 const isPaymentRequestSupported = 'PaymentRequest' in window;
 
 class App extends Component {
-  onClick = hit => {
+  onHitClick = hit => {
     if (!isPaymentRequestSupported) {
       return;
     }
@@ -51,7 +51,7 @@ class App extends Component {
               <Configure hitsPerPage={5} />
 
               <SearchBox />
-              <Hits onClick={this.onClick} />
+              <Hits onHitClick={this.onHitClick} />
             </InstantSearch>
           </div>
         </section>

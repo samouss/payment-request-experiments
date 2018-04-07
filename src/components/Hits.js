@@ -2,7 +2,7 @@ import React from 'react';
 import { Highlight } from 'react-instantsearch/dom';
 import { connectHits } from 'react-instantsearch/connectors';
 
-const Hits = ({ hits, onClick }) => (
+const Hits = ({ hits, onHitClick }) => (
   <div style={{ marginTop: '1.5rem' }}>
     {hits.map(hit => (
       <div key={hit.objectID} className="card">
@@ -13,7 +13,10 @@ const Hits = ({ hits, onClick }) => (
             </p>
             <Highlight hit={hit} attribute="description" tagName="mark" />
           </div>
-          <button className="button is-link is-pulled-right" onClick={onClick}>
+          <button
+            className="button is-link is-pulled-right"
+            onClick={onHitClick}
+          >
             ${hit.price}
           </button>
         </div>
