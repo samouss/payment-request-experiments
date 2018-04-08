@@ -3,6 +3,7 @@ import { InstantSearch, Configure } from 'react-instantsearch/dom';
 import PaymentStatus from './components/PaymentStatus';
 import SearchBox from './components/SearchBox';
 import Hits from './components/Hits';
+import Link from './components/Link';
 import createPaymentRequest from './payment';
 import processPaymentOnServer from './client';
 
@@ -68,7 +69,11 @@ class App extends Component {
           <div className="container">
             {!isPaymentRequestSupported && (
               <div className="notification is-danger">
-                Your browser doesn't support <a href="">PaymentRequest</a>.
+                Your browser doesn't support{' '}
+                <Link href="https://developer.mozilla.org/en-US/docs/Web/API/Payment_Request_API">
+                  PaymentRequest
+                </Link>{' '}
+                API.
               </div>
             )}
 
@@ -76,9 +81,17 @@ class App extends Component {
 
             <div className="notification">
               This is an experiments using{' '}
-              <a href="">Algolia React InstantSearch</a> &{' '}
-              <a href="">PaymentRequest</a> APIs. You can find the code on{' '}
-              <a href="">GitHub</a>.
+              <Link href="https://community.algolia.com/react-instantsearch">
+                Algolia React InstantSearch
+              </Link>{' '}
+              &{' '}
+              <Link href="https://developer.mozilla.org/en-US/docs/Web/API/Payment_Request_API">
+                PaymentRequest
+              </Link>{' '}
+              APIs. You can find the code on{' '}
+              <Link href="https://github.com/samouss/payment-request-experiments">
+                GitHub
+              </Link>.
             </div>
 
             <InstantSearch
