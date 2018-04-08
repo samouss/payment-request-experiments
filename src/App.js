@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { InstantSearch, Configure } from 'react-instantsearch/dom';
+import PaymentStatus from './components/PaymentStatus';
 import SearchBox from './components/SearchBox';
 import Hits from './components/Hits';
 import { createRequest } from './payment';
@@ -73,19 +74,7 @@ class App extends Component {
               </div>
             )}
 
-            {isPaymentComplete && (
-              <div
-                className={`notification is-${
-                  isPaymentSuccess ? 'success' : 'warning'
-                }`}
-              >
-                <strong>
-                  {isPaymentSuccess
-                    ? 'Payment did complete.'
-                    : "ayment didn't complete."}
-                </strong>
-              </div>
-            )}
+            {isPaymentComplete && <PaymentStatus success={isPaymentSuccess} />}
 
             <div className="notification">
               This is an experiments using{' '}
