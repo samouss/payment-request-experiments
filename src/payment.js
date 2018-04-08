@@ -1,7 +1,6 @@
 import { v4 } from 'uuid';
 
-const standardShippingPrice = 10;
-const droneShippingPrice = 25;
+const format = x => x.toFixed(2);
 
 // Credit card (see: https://developer.mozilla.org/en-US/docs/Web/API/BasicCardRequest)
 // Apple Pay (see: https://webkit.org/blog/8182/introducing-the-payment-request-api-for-apple-pay)
@@ -16,51 +15,56 @@ const providers = [
   },
 ];
 
-const format = x => x.toFixed(2);
+const standardShippingPrice = 10;
+const droneShippingPrice = 25;
 
-export const createRequest = product => {
+const shippingOptions = [
+  {
+    id: 'standard',
+    label: '🚚 Ground Shipping (2 days)',
+    amount: {
+      currency: 'USD',
+      value: format(standardShippingPrice),
+      price: standardShippingPrice,
+    },
+    selected: true,
+  },
+  {
+    id: 'drone',
+    label: '🚁 Drone Express (2 hours)',
+    amount: {
+      currency: 'USD',
+      value: format(droneShippingPrice),
+      price: droneShippingPrice,
+    },
+    selected: false,
+  },
+];
+
+export const createRequest = products => {
+  const amount = products.reduce((acc, product) => acc + product.price, 0);
+
+  const total = {
+    label: 'Total amount',
+    amount: {
+      currency: 'USD',
+      value: format(amount + standardShippingPrice),
+    },
+  };
+
+  const displayItems = products.map(product => ({
+    label: product.name,
+    amount: {
+      currency: 'USD',
+      value: format(product.price),
+    },
+  }));
+
   const details = {
     id: v4(),
-    total: {
-      label: 'Total amount',
-      amount: {
-        currency: 'USD',
-        value: format(product.price + standardShippingPrice),
-        price: product.price + standardShippingPrice,
-      },
-    },
-    displayItems: [
-      {
-        label: product.name,
-        amount: {
-          currency: 'USD',
-          value: format(product.price),
-          price: product.price,
-        },
-      },
-    ],
-    shippingOptions: [
-      {
-        id: 'standard',
-        label: '🚚 Ground Shipping (2 days)',
-        amount: {
-          currency: 'USD',
-          value: format(standardShippingPrice),
-          price: standardShippingPrice,
-        },
-        selected: true,
-      },
-      {
-        id: 'drone',
-        label: '🚁 Drone Express (2 hours)',
-        amount: {
-          currency: 'USD',
-          value: format(droneShippingPrice),
-          price: droneShippingPrice,
-        },
-        selected: false,
-      },
-    ],
+    total,
+    displayItems,
+    shippingOptions,
   };
 
   const request = new window.PaymentRequest(providers, details, {
@@ -70,11 +74,11 @@ export const createRequest = product => {
   request.addEventListener('shippingoptionchange', event => {
     const request = event.currentTarget;
 
-    const shippingOption = details.shippingOptions.find(
+    const shippingOption = shippingOptions.find(
       option => option.id === request.shippingOption
     );
 
-    const nextShippingOptions = details.shippingOptions.map(option => ({
+    const nextShippingOptions = shippingOptions.map(option => ({
       ...option,
       selected: option.id === request.shippingOption,
     }));
@@ -86,7 +90,7 @@ export const createRequest = product => {
         label: 'Total amount',
         amount: {
           currency: 'USD',
-          value: format(product.price + shippingOption.amount.price),
+          value: format(amount + parseFloat(shippingOption.amount.value)),
         },
       },
     });

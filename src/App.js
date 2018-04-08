@@ -19,10 +19,12 @@ class App extends Component {
       return;
     }
 
-    const request = createRequest({
-      name: hit.name,
-      price: hit.price,
-    });
+    const request = createRequest([
+      {
+        name: hit.name,
+        price: hit.price,
+      },
+    ]);
 
     request
       .show()
