@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Highlight } from 'react-instantsearch/dom';
 import { connectHits } from 'react-instantsearch/connectors';
 
-const Hits = ({ hits, onHitClick }) => (
+const Hits = ({ hits, enablePayment, onHitClick }) => (
   <div style={{ marginTop: '1.5rem' }}>
     {hits.map(hit => (
       <div key={hit.objectID} className="card">
@@ -16,6 +16,7 @@ const Hits = ({ hits, onHitClick }) => (
           </div>
           <button
             className="button is-link is-pulled-right"
+            disabled={!enablePayment}
             onClick={() => onHitClick(hit)}
           >
             ${hit.price}
@@ -35,6 +36,7 @@ const HitPropTypes = PropTypes.shape({
 
 Hits.propTypes = {
   hits: PropTypes.arrayOf(HitPropTypes).isRequired,
+  enablePayment: PropTypes.bool.isRequired,
   onHitClick: PropTypes.func.isRequired,
 };
 
