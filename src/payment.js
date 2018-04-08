@@ -64,7 +64,7 @@ const onShippingOptionChange = ({ details, totalAmount }) => event => {
   });
 };
 
-export const createRequest = products => {
+const createPaymentRequest = products => {
   const [defaultShippingOption] = shippingOptions;
   const totalAmount = products.reduce((acc, product) => acc + product.price, 0);
   const totalAmountWithShipping =
@@ -107,3 +107,5 @@ export const createRequest = products => {
 
   return request;
 };
+
+export default createPaymentRequest;

@@ -3,7 +3,7 @@ import { InstantSearch, Configure } from 'react-instantsearch/dom';
 import PaymentStatus from './components/PaymentStatus';
 import SearchBox from './components/SearchBox';
 import Hits from './components/Hits';
-import { createRequest } from './payment';
+import createPaymentRequest from './payment';
 import { processPayment } from './client';
 
 const isPaymentRequestSupported = 'PaymentRequest' in window;
@@ -19,7 +19,7 @@ class App extends Component {
       return;
     }
 
-    const request = createRequest([
+    const request = createPaymentRequest([
       {
         name: hit.name,
         price: hit.price,
