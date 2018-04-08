@@ -2,19 +2,56 @@ import React, { Component, Fragment } from 'react';
 import { InstantSearch, Configure } from 'react-instantsearch/dom';
 import SearchBox from './components/SearchBox';
 import Hits from './components/Hits';
+import { createRequest } from './payment';
+import { processPayment } from './client';
 
 const isPaymentRequestSupported = 'PaymentRequest' in window;
 
 class App extends Component {
+  state = {
+    isPaymentComplete: false,
+    isPaymentSuccess: true,
+  };
+
   onHitClick = hit => {
     if (!isPaymentRequestSupported) {
       return;
     }
 
-    console.log(hit);
+    const request = createRequest({
+      name: hit.name,
+      price: hit.price,
+    });
+
+    request
+      .show()
+      .then(response => {
+        return processPayment(response)
+          .then(() => {
+            this.setState(() => ({
+              isPaymentComplete: true,
+              isPaymentSuccess: true,
+            }));
+
+            return response.complete('success');
+          })
+          .catch(() => {
+            this.setState(() => ({
+              isPaymentComplete: true,
+              isPaymentSuccess: false,
+            }));
+
+            return response.complete('fail');
+          });
+      })
+      .catch(err => {
+        console.log('Show', err);
+      });
   };
 
   render() {
+    const { isPaymentComplete, isPaymentSuccess } = this.state;
+
     return (
       <Fragment>
         <section className="hero is-medium is-dark is-bold">
@@ -33,6 +70,20 @@ class App extends Component {
             {!isPaymentRequestSupported && (
               <div className="notification is-danger">
                 Your browser doesn't support <a href="">PaymentRequest</a>.
+              </div>
+            )}
+
+            {isPaymentComplete && (
+              <div
+                className={`notification is-${
+                  isPaymentSuccess ? 'success' : 'warning'
+                }`}
+              >
+                <strong>
+                  {isPaymentSuccess
+                    ? 'Payment did complete.'
+                    : "ayment didn't complete."}
+                </strong>
               </div>
             )}
 
