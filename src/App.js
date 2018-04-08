@@ -15,10 +15,6 @@ class App extends Component {
   };
 
   onHitClick = hit => {
-    if (!isPaymentRequestSupported) {
-      return;
-    }
-
     const request = createPaymentRequest([
       {
         name: hit.name,
@@ -91,9 +87,11 @@ class App extends Component {
               indexName="instant_search"
             >
               <Configure hitsPerPage={5} />
-
               <SearchBox />
-              <Hits onHitClick={this.onHitClick} />
+              <Hits
+                onHitClick={this.onHitClick}
+                enablePayment={isPaymentRequestSupported}
+              />
             </InstantSearch>
           </div>
         </section>
