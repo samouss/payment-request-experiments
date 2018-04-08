@@ -15,16 +15,13 @@ const providers = [
   },
 ];
 
-const standardShippingPrice = 10;
-const droneShippingPrice = 25;
-
 const shippingOptions = [
   {
     id: 'standard',
     label: '🚚 Ground Shipping (2 days)',
     amount: {
       currency: 'USD',
-      value: format(standardShippingPrice),
+      value: '10.00',
     },
     selected: true,
   },
@@ -33,7 +30,7 @@ const shippingOptions = [
     label: '🚁 Drone Express (2 hours)',
     amount: {
       currency: 'USD',
-      value: format(droneShippingPrice),
+      value: '25.00',
     },
     selected: false,
   },
@@ -45,6 +42,9 @@ const onShippingOptionChange = ({ details, totalAmount }) => event => {
   const shippingOption = shippingOptions.find(
     option => option.id === request.shippingOption
   );
+
+  const totalAmountWithShipping =
+    totalAmount + parseFloat(shippingOption.amount.value);
 
   const nextShippingOptions = shippingOptions.map(option => ({
     ...option,
@@ -58,20 +58,23 @@ const onShippingOptionChange = ({ details, totalAmount }) => event => {
       label: 'Total amount',
       amount: {
         currency: 'USD',
-        value: format(totalAmount + parseFloat(shippingOption.amount.value)),
+        value: format(totalAmountWithShipping),
       },
     },
   });
 };
 
 export const createRequest = products => {
+  const [defaultShippingOption] = shippingOptions;
   const totalAmount = products.reduce((acc, product) => acc + product.price, 0);
+  const totalAmountWithShipping =
+    totalAmount + parseFloat(defaultShippingOption.amount.value);
 
   const total = {
     label: 'Total amount',
     amount: {
       currency: 'USD',
-      value: format(totalAmount + standardShippingPrice),
+      value: format(totalAmountWithShipping),
     },
   };
 
