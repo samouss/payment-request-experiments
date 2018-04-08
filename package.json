@@ -2,6 +2,15 @@
   "name": "payment-request-experiments",
   "version": "1.0.0",
   "private": true,
+  "scripts": {
+    "clean": "rm -rf build",
+    "cname": "cp CNAME build/CNAME",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "deploy": "yarn clean && yarn build && yarn cname && (cd build && surge)"
+  },
   "dependencies": {
     "bulma": "^0.6.2",
     "prop-types": "^15.6.1",
@@ -11,10 +20,7 @@
     "react-scripts": "1.1.4",
     "uuid": "^3.2.1"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+  "devDependencies": {
+    "surge": "0.20.1"
   }
 }
