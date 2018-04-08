@@ -25,7 +25,6 @@ const shippingOptions = [
     amount: {
       currency: 'USD',
       value: format(standardShippingPrice),
-      price: standardShippingPrice,
     },
     selected: true,
   },
@@ -35,20 +34,44 @@ const shippingOptions = [
     amount: {
       currency: 'USD',
       value: format(droneShippingPrice),
-      price: droneShippingPrice,
     },
     selected: false,
   },
 ];
 
+const onShippingOptionChange = ({ details, totalAmount }) => event => {
+  const request = event.currentTarget;
+
+  const shippingOption = shippingOptions.find(
+    option => option.id === request.shippingOption
+  );
+
+  const nextShippingOptions = shippingOptions.map(option => ({
+    ...option,
+    selected: option.id === request.shippingOption,
+  }));
+
+  event.updateWith({
+    ...details,
+    shippingOptions: nextShippingOptions,
+    total: {
+      label: 'Total amount',
+      amount: {
+        currency: 'USD',
+        value: format(totalAmount + parseFloat(shippingOption.amount.value)),
+      },
+    },
+  });
+};
+
 export const createRequest = products => {
-  const amount = products.reduce((acc, product) => acc + product.price, 0);
+  const totalAmount = products.reduce((acc, product) => acc + product.price, 0);
 
   const total = {
     label: 'Total amount',
     amount: {
       currency: 'USD',
-      value: format(amount + standardShippingPrice),
+      value: format(totalAmount + standardShippingPrice),
     },
   };
 
@@ -71,30 +94,13 @@ export const createRequest = products => {
     requestShipping: true,
   });
 
-  request.addEventListener('shippingoptionchange', event => {
-    const request = event.currentTarget;
-
-    const shippingOption = shippingOptions.find(
-      option => option.id === request.shippingOption
-    );
-
-    const nextShippingOptions = shippingOptions.map(option => ({
-      ...option,
-      selected: option.id === request.shippingOption,
-    }));
-
-    event.updateWith({
-      ...details,
-      shippingOptions: nextShippingOptions,
-      total: {
-        label: 'Total amount',
-        amount: {
-          currency: 'USD',
-          value: format(amount + parseFloat(shippingOption.amount.value)),
-        },
-      },
-    });
-  });
+  request.addEventListener(
+    'shippingoptionchange',
+    onShippingOptionChange({
+      details,
+      totalAmount,
+    })
+  );
 
   return request;
 };
