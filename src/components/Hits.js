@@ -16,7 +16,7 @@ const Hits = ({ hits, onHitClick }) => (
           </div>
           <button
             className="button is-link is-pulled-right"
-            onClick={onHitClick}
+            onClick={() => onHitClick(hit)}
           >
             ${hit.price}
           </button>
