@@ -71,7 +71,7 @@ class App extends Component {
               <div className="notification is-danger">
                 Your browser doesn't support{' '}
                 <Link href="https://developer.mozilla.org/en-US/docs/Web/API/Payment_Request_API">
-                  PaymentRequest
+                  Payment Request
                 </Link>{' '}
                 API.
               </div>
