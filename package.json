@@ -12,13 +12,13 @@
     "deploy": "yarn clean && yarn build && yarn cname && (cd build && surge)"
   },
   "dependencies": {
-    "bulma": "^0.6.2",
-    "prop-types": "^15.6.1",
-    "react": "^16.3.1",
-    "react-dom": "^16.3.1",
-    "react-instantsearch": "^5.0.3",
+    "bulma": "0.6.2",
+    "prop-types": "15.6.1",
+    "react": "16.3.1",
+    "react-dom": "16.3.1",
+    "react-instantsearch": "5.0.3",
     "react-scripts": "1.1.4",
-    "uuid": "^3.2.1"
+    "uuid": "3.2.1"
   },
   "devDependencies": {
     "surge": "0.20.1"
