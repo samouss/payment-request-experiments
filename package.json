@@ -4,23 +4,20 @@
   "private": true,
   "scripts": {
     "clean": "rm -rf build",
-    "cname": "cp CNAME build/CNAME",
-    "start": "react-scripts start",
+    "start:client": "react-scripts start",
+    "start:server": "node src/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "deploy": "yarn clean && yarn build && yarn cname && (cd build && surge)"
+    "heroku-postbuild": "yarn clean && yarn build"
   },
   "dependencies": {
     "bulma": "0.6.2",
+    "express": "4.16.3",
     "prop-types": "15.6.1",
     "react": "16.3.1",
     "react-dom": "16.3.1",
     "react-instantsearch": "5.0.3",
     "react-scripts": "1.1.4",
     "uuid": "3.2.1"
-  },
-  "devDependencies": {
-    "surge": "0.20.1"
   }
 }
