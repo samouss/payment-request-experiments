@@ -46,6 +46,9 @@ class App extends Component {
       })
       .catch(err => {
         // UI Abort
+        console.log(err);
+        console.log(err.name);
+        console.log(err.code);
       });
   };
 
