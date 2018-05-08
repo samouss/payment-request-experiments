@@ -2,7 +2,8 @@
 
 Payment Request Experiments built with CRA, Bulma.
 
-Live: [https://longing-trains.surge.sh](https://longing-trains.surge.sh)
+Live: [https://payment-request-experiments.herokuapp.com](https://payment-request-experiments.herokuapp.com) (it's a free dyno so be patient for the boot time 🙂)
+
 
 ## Installation
 
