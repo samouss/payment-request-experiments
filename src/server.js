@@ -6,7 +6,7 @@ const request = require('request-promise-native');
 const express = require('express');
 
 const port = process.env.PORT || 8080;
-const cert = path.join(__dirname, '..', 'certificates', 'ApplePay.pem');
+const cert = path.join(__dirname, '..', 'certificates', 'merchant_id.pem');
 
 const server = express();
 
