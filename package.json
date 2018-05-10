@@ -23,5 +23,6 @@
     "request": "2.85.0",
     "request-promise-native": "1.0.5",
     "uuid": "3.2.1"
-  }
+  },
+  "proxy": "http://localhost:8080"
 }
