@@ -1,4 +1,5 @@
 import { v4 } from 'uuid';
+import { session } from './client';
 
 const format = x => x.toFixed(2);
 
@@ -11,6 +12,16 @@ const providers = [
     data: {
       supportedNetworks: ['mastercard', 'visa'],
       supportedTypes: ['credit', 'debit'],
+    },
+  },
+  {
+    supportedMethods: 'https://apple.com/apple-pay',
+    data: {
+      merchantIdentifier: 'merchant.com.payment-request-experiments',
+      version: 3,
+      countryCode: 'FR',
+      merchantCapabilities: ['supports3DS'],
+      supportedNetworks: ['masterCard', 'visa'],
     },
   },
 ];
@@ -64,6 +75,12 @@ const onShippingOptionChange = ({ details, totalAmount }) => event => {
   });
 };
 
+const onMerchantValidation = event => {
+  session({ endpoint: event.validationURL }).then(session => {
+    event.complete(session);
+  });
+};
+
 const createPaymentRequest = products => {
   const [defaultShippingOption] = shippingOptions;
   const totalAmount = products.reduce((acc, product) => acc + product.price, 0);
@@ -104,6 +121,8 @@ const createPaymentRequest = products => {
       totalAmount,
     })
   );
+
+  request.addEventListener('merchantvalidation', onMerchantValidation);
 
   return request;
 };
