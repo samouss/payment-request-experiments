@@ -5,7 +5,7 @@ import SearchBox from './components/SearchBox';
 import Hits from './components/Hits';
 import Link from './components/Link';
 import createPaymentRequest from './payment';
-import processPaymentOnServer from './client';
+import { payment } from './client';
 
 const isPaymentRequestSupported = 'PaymentRequest' in window;
 
@@ -26,7 +26,7 @@ class App extends Component {
     request
       .show()
       .then(response => {
-        return processPaymentOnServer(response)
+        return payment()
           .then(() => {
             this.setState(() => ({
               isPaymentComplete: true,
