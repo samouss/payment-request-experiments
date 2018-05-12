@@ -6,7 +6,8 @@ const request = require('request-promise-native');
 const express = require('express');
 
 const port = process.env.PORT || 8080;
-const cert = path.join(__dirname, '..', 'certificates', 'merchant_id.pem');
+const cert = path.join(__dirname, '..', 'certificates', 'merchant_id.cert.pem');
+const key = path.join(__dirname, '..', 'certificates', 'merchant_id.key.pem');
 
 const server = express();
 
@@ -25,7 +26,7 @@ server.post('/session', (req, res) => {
     method: 'POST',
     json: true,
     cert: fs.readFileSync(cert),
-    key: fs.readFileSync(cert),
+    key: fs.readFileSync(key),
     body: {
       merchantIdentifier: 'merchant.com.payment-request-experiments',
       displayName: 'Payment Request Experiments',
