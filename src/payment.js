@@ -3,9 +3,6 @@ import { session } from './client';
 
 const format = x => x.toFixed(2);
 
-// Credit card (see: https://developer.mozilla.org/en-US/docs/Web/API/BasicCardRequest)
-// Apple Pay (see: https://webkit.org/blog/8182/introducing-the-payment-request-api-for-apple-pay)
-// Google Pay (see: https://developers.google.com/pay/api/web/paymentrequest/tutorial)
 const providers = [
   {
     supportedMethods: 'basic-card',
