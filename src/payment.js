@@ -44,7 +44,7 @@ const shippingOptions = [
   },
 ];
 
-const onShippingOptionChange = ({ details, totalAmount }) => event => {
+const onShippingChange = ({ details, totalAmount }) => event => {
   const request = event.currentTarget;
 
   const shippingOption = shippingOptions.find(
@@ -70,10 +70,6 @@ const onShippingOptionChange = ({ details, totalAmount }) => event => {
       },
     },
   });
-};
-
-const onShippingAddressChange = ({ details }) => event => {
-  event.updateWith(details);
 };
 
 const onMerchantValidation = event => {
@@ -117,7 +113,7 @@ const createPaymentRequest = products => {
 
   request.addEventListener(
     'shippingoptionchange',
-    onShippingOptionChange({
+    onShippingChange({
       details,
       totalAmount,
     })
@@ -125,8 +121,9 @@ const createPaymentRequest = products => {
 
   request.addEventListener(
     'shippingaddresschange',
-    onShippingAddressChange({
+    onShippingChange({
       details,
+      totalAmount,
     })
   );
 
