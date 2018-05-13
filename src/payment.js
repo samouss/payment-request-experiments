@@ -75,6 +75,10 @@ const onShippingOptionChange = ({ details, totalAmount }) => event => {
   });
 };
 
+const onShippingAddressChange = ({ details }) => event => {
+  event.updateWith(details);
+};
+
 const onMerchantValidation = event => {
   session({ endpoint: event.validationURL }).then(session => {
     event.complete(session);
@@ -119,6 +123,13 @@ const createPaymentRequest = products => {
     onShippingOptionChange({
       details,
       totalAmount,
+    })
+  );
+
+  request.addEventListener(
+    'shippingaddresschange',
+    onShippingAddressChange({
+      details,
     })
   );
 
