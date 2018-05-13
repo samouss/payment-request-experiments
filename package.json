@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "clean": "rm -rf build",
+    "start": "node src/server.js",
     "start:client": "react-scripts start",
-    "start:server": "node src/server.js",
+    "start:server": "nodemon src/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "heroku-postbuild": "yarn clean && yarn build"
@@ -23,6 +24,9 @@
     "request": "2.85.0",
     "request-promise-native": "1.0.5",
     "uuid": "3.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.4"
   },
   "proxy": "http://localhost:8080"
 }
