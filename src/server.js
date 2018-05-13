@@ -9,6 +9,13 @@ const port = process.env.PORT || 8080;
 const cert = path.join(__dirname, '..', 'certificates', 'merchant_id.cert.pem');
 const key = path.join(__dirname, '..', 'certificates', 'merchant_id.key.pem');
 
+if (!fs.existsSync(cert) || !fs.existsSync(key)) {
+  throw new Error(`
+    The server can not run without Apple Pay certificate.
+    See: https://developer.apple.com/documentation/apple_pay_on_the_web/configuring_your_environment
+  `);
+}
+
 const server = express();
 
 // Middlewares
