@@ -24,8 +24,6 @@ server.use(bodyParser.json());
 
 // Register static files
 server.use('/', express.static(path.join(__dirname, '..', 'build')));
-// prettier-ignore
-server.use('/.well-known', express.static(path.join(__dirname, 'payment')));
 
 server.post('/session', (req, res) => {
   request({
