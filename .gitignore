@@ -8,8 +8,8 @@
 
 # production
 /build
-/certificates/*.pem
-/certificates/*.cert
+/server/certificates/*.pem
+/server/certificates/*.cert
 
 # misc
 .DS_Store

@@ -6,8 +6,8 @@ const request = require('request-promise-native');
 const express = require('express');
 
 const port = process.env.PORT || 8080;
-const cert = path.join(__dirname, '..', 'certificates', 'merchant_id.cert.pem');
-const key = path.join(__dirname, '..', 'certificates', 'merchant_id.key.pem');
+const cert = path.join(__dirname, 'certificates', 'merchant_id.cert.pem');
+const key = path.join(__dirname, 'certificates', 'merchant_id.key.pem');
 
 if (!fs.existsSync(cert) || !fs.existsSync(key)) {
   throw new Error(`
@@ -25,7 +25,7 @@ server.use(bodyParser.json());
 // Register static files
 server.use('/', express.static(path.join(__dirname, '..', 'build')));
 // prettier-ignore
-server.use('/.well-known', express.static(path.join(__dirname, '..', 'payment')));
+server.use('/.well-known', express.static(path.join(__dirname, 'payment')));
 
 server.post('/session', (req, res) => {
   request({
