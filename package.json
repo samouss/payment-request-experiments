@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "clean": "rm -rf build",
-    "start": "node src/server.js",
+    "start": "node server/index.js",
     "start:client": "react-scripts start",
-    "start:server": "nodemon src/server.js",
+    "start:server": "nodemon server/index.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "heroku-postbuild": "yarn clean && yarn build"
