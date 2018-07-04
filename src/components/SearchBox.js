@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connectSearchBox } from 'react-instantsearch/connectors';
+import { connectSearchBox } from 'react-instantsearch-dom';
 
 const SearchBox = ({ currentRefinement, refine }) => (
   <input

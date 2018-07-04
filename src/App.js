@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { InstantSearch, Configure } from 'react-instantsearch/dom';
+import { InstantSearch, Configure } from 'react-instantsearch-dom';
 import PaymentStatus from './components/PaymentStatus';
 import SearchBox from './components/SearchBox';
 import Hits from './components/Hits';
