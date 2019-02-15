@@ -22,7 +22,7 @@
     "react-instantsearch-dom": "5.4.0",
     "react-scripts": "2.1.5",
     "request": "2.88.0",
-    "request-promise-native": "1.0.5",
+    "request-promise-native": "1.0.7",
     "uuid": "3.3.2"
   },
   "devDependencies": {
