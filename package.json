@@ -20,7 +20,7 @@
     "react": "16.14.0",
     "react-dom": "16.14.0",
     "react-instantsearch-dom": "5.7.0",
-    "react-scripts": "3.4.3",
+    "react-scripts": "3.4.4",
     "request": "2.88.2",
     "request-promise-native": "1.0.9",
     "uuid": "8.3.1"
