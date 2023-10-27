@@ -26,7 +26,7 @@
     "uuid": "9.0.0"
   },
   "devDependencies": {
-    "nodemon": "2.0.20"
+    "nodemon": "2.0.22"
   },
   "proxy": "http://localhost:8080"
 }
